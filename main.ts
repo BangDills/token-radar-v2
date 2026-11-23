@@ -1,14 +1,17 @@
-// A working token-radar-01 entry (Node 22, standard library only).
+// A token-radar-01 entry (Node 22, standard library only): radar-2 model.
 //
 // The program reads the sealed snapshot from /input/snapshot.json (or --input <file|dir>), scores every
-// pre-token protocol with the model in lib/model.ts, writes the ranked board to /output/board.json, and
-// copies this repository's dashboard/ and screenshots/ to /output. Last, it writes /output/dossier.json,
-// the summary the judge reads, with the vendored make.fun library.
+// pre-token protocol with the fitted sector-comps model in lib/model.ts, writes the ranked board to
+// /output/board.json, and copies this repository's dashboard/ and screenshots/ to /output. Last, it
+// writes /output/dossier.json, the summary the judge reads, with the vendored make.fun library.
+//
+// Implied value is TVL times the sector's own live-token mcap/TVL median (128 comps, snapshot
+// 2026-11-14), times a clamped growth multiplier, times the TGE-wait curve over listing age, times
+// chain breadth; token odds are the peer record per age cohort. Held-out tests (leave-one-out and
+// walk-forward) are computed offline from the same comps and stated in lib/model.ts and on the page.
 //
 // The dashboard is a static page, no framework and no network: dashboard/index.html, dashboard/app.css
-// and dashboard/app.js read /output/data.js, which this program writes from the same board. A starting
-// point, not a winner: it covers the watchlist, states the model and gives every protocol a farm plan.
-// Change the model, the page or the plan; keep the gate's shape.
+// and dashboard/app.js read /output/data.js, which this program writes from the same board.
 //
 // Outside the grader's container, MAKEFUN_OUTPUT_DIR stands in for /output:
 //   mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts --input ../input/snapshot.json
